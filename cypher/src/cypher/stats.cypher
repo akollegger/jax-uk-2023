@@ -20,3 +20,8 @@ WHERE you.name = "ABK"
   AND NOT (you)-[:VIEW]->(c)
 RETURN c, count(v) as views 
 ORDER by views DESC LIMIT 10
+
+// most viewed posts
+MATCH (f:Person)-[:VIEW]->(c:Content)
+RETURN c, count(f) as viewers
+ORDER BY viewers DESC LIMIT 10

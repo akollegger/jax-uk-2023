@@ -40,7 +40,8 @@ MATCH (a:Person)
 CALL {
   WITH a
   MATCH (c:Content)
-  WITH apoc.coll.randomItems(COLLECT(c), 10) AS contents
-  MERGE (a)-[:VIEW]->(contents)
+  WITH a, apoc.coll.randomItems(COLLECT(c), 10) AS contents
+  UNWIND contents AS content
+  MERGE (a)-[:VIEW]->(content)
 }
 
